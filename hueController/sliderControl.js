@@ -204,7 +204,7 @@ async function toggleLight(lightID, button) {
             body: JSON.stringify({ on: newState })            
         });
 
-        // 更新 UI
+        // update UI
         button.classList.toggle("on", newState);
         button.innerText = `${newState ? "◯" : "－"}`;
         console.log(`now LIGHT ${lightID} is ${newState}`);
@@ -264,7 +264,7 @@ async function applyLocalScene(sceneName) {
         return;
     }
 
-    // 暂停 `syncLoop()`
+    // break `syncLoop()`
     if (window.syncInterval) {
         clearTimeout(window.syncInterval);
         window.syncInterval = null;
@@ -291,12 +291,12 @@ async function applyLocalScene(sceneName) {
         }
     }
 
-    // 允许 Hue Hub 处理状态更新，暂停同步 3 秒
+    // 3s to break from continous sync
     setTimeout(() => {
         console.log("Resuming sync...");
         startSync();
     }, 3000);
-
+    //call function to update scene name button
     updateSceneButton(sceneName);
 }
 
@@ -315,10 +315,10 @@ async function updateSceneButton(sceneName) {
             const data = await response.json();
             const lightState = data.state;
 
-            // 检查 亮度（bri）、色温（ct）、开关状态（on）
+            // check if bri ct and oh matches
             if (lightState.bri !== params.bri || lightState.ct !== params.ct || lightState.on !== true) {
                 allMatch = false;
-                break; // 只要有一个不匹配，就可以退出循环
+                break; // all need to match, or break the loop
             }
         } catch (error) {
             console.error(`Error checking light ${lightID} state:`, error);
@@ -326,7 +326,7 @@ async function updateSceneButton(sceneName) {
         }
     }
 
-    // **根据匹配状态更新 UI**
+    // update highlight based on current state
     const sceneButton = document.getElementById(`${sceneName}Button`);
     if (sceneButton) {
         sceneButton.classList.toggle("active", allMatch);
@@ -357,10 +357,11 @@ async function updateSceneButton(sceneName) {
 //     }
 // }
 
-
+//load when webpage launches
 loadConfig();
 loadScenes();
 
+//get current API parameters
 async function startSync() {
     if (!currentIP || !currentUsername) {
         console.error("Sync Failed：currentIP or currentUsername is not defined");
@@ -394,7 +395,7 @@ async function startSync() {
                 await new Promise(resolve => setTimeout(resolve, 100));
             }
 
-            // **每次同步后检查场景状态**
+            // check scene list after every sync
             Object.keys(sceneData).forEach(sceneName => {
             updateSceneButton(sceneName);
             });
@@ -447,7 +448,7 @@ async function saveCurrentScene(sceneName) {
 
     const url = `http://${currentIP}/api/${currentUsername}/scenes`;
 
-    // 获取当前所有灯的状态
+    // get all param values from html elements
     const lights = document.querySelectorAll(".light-container");
     const sceneLights = {};
     const lightIDs = [];
@@ -455,7 +456,7 @@ async function saveCurrentScene(sceneName) {
     lights.forEach(light => {
         const lightID = light.querySelector(".slider").dataset.lightId;
         const bri = parseInt(light.querySelector(".slider").value, 10);
-        const ct = parseInt(light.querySelector(".ctBar").value, 10);  // 获取色温
+        const ct = parseInt(light.querySelector(".ctBar").value, 10); 
         const isOn = light.querySelector(".light-button").classList.contains("on");
 
         console.log(`Light ID: ${lightID}, On: ${isOn}, Bri: ${bri}, Ct: ${ct}`);
@@ -463,7 +464,7 @@ async function saveCurrentScene(sceneName) {
         sceneLights[lightID] = {
             on: isOn,
             bri: bri,
-            ct: ct  // 添加色温
+            ct: ct 
         };
         lightIDs.push(lightID);
     });
@@ -471,15 +472,15 @@ async function saveCurrentScene(sceneName) {
     console.log("Scene lights data:", sceneLights);
     console.log("Light IDs:", lightIDs);
 
-    // 发送请求，把 Scene 存入 Hue API
+    // request to save Scene into Hue API
     const requestData = {
-        name: sceneName,  // 场景名称
-        lights: lightIDs, // 受控灯光 ID 列表
-        lightstates: sceneLights, // 每个灯的状态
+        name: sceneName,  
+        lights: lightIDs, 
+        lightstates: sceneLights, 
         recycle: false
     };
 
-    console.log("Request Data:", requestData);  // 查看构造的请求数据
+    console.log("Request Data:", requestData);  // body message
 
     try {
         const response = await fetch(url, {
@@ -490,7 +491,7 @@ async function saveCurrentScene(sceneName) {
 
         const result = await response.json();
 
-        // 如果 Hue API 返回的错误信息
+        // if API return wrong
         if (result.error) {
             console.error("Error saving scene:", result.error);
         } else {
@@ -516,7 +517,7 @@ async function loadExistingScenes() {
         const scenes = await response.json();
 
         const sceneContainer = document.getElementById("sceneContainer");
-        sceneContainer.innerHTML = ""; // 清空现有的按钮
+        sceneContainer.innerHTML = ""; // clear all current buttons
 
         Object.entries(scenes).forEach(([sceneID, scene]) => {
             const button = document.createElement("button");
@@ -541,7 +542,7 @@ async function applyAPIScene(sceneID) {
         return;
     }
 
-    const url = `http://${currentIP}/api/${currentUsername}/groups/0/action`; // `0` 代表所有灯光组
+    const url = `http://${currentIP}/api/${currentUsername}/groups/0/action`; // `0` is all groups
 
     try {
         await fetch(url, {
@@ -556,5 +557,5 @@ async function applyAPIScene(sceneID) {
     }
 }
 
-// 在页面加载时调用
+// load at first when webpage loads
 // loadExistingScenes();
