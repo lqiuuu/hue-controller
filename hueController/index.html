@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <script src="hue.js"></script> -->
+  <!-- <script src="huecontrol.js" defer></script> -->
+  <script src="sliderControl.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Fredoka:wght@300..700&family=Kablammo&family=Londrina+Sketch&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Road+Rage&family=Rock+3D&family=Share+Tech+Mono&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+
+  <title>Minimal Hue Example</title>
+</head>
+
+<body>
+
+<div>
+<!-- 选择 Hue Bridge IP -->
+<select id="ipSelect"></select>
+
+<!-- 选择用户 -->
+<select id="userSelect"></select>
+</div>
+<br>
+
+<!-- <div> -->
+<!-- 添加新用户 -->
+<!-- <input type="text" id="newUser" placeholder="New User id"> -->
+<!-- <input type="text" id="newToken" placeholder="New API token"> -->
+<!-- <button id="addUserBtn">add user</button> -->
+<!-- </div> -->
+<!-- <br> -->
+
+<!-- 选择灯 -->
+<div> Selet Light:
+<select id="lightSelect"></select>
+</div>
+
+<!-- 亮度控制 -->
+<div>
+    <p>Brightness:</p>
+<input type="range" id="slider" min="1" max="254" value="127">
+<span id="sliderValue">127</span>
+</div>
+<div id="urlDisplay"></div>
+<div id="response"></div>
+
+  
+</body>
+</html>

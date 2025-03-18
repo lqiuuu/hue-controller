@@ -1,0 +1,218 @@
+*{
+    margin: .5em;
+    font-family: "Fredoka", sans-serif;
+    font-size: 20px;
+    background-color: #F8F5F2;
+    color: #37474F;
+}
+
+#lightsContainer{
+    display: flex;
+    flex-direction:row;
+    /* margin: 2em; */
+    /* width: 100%; */
+    align-items: center;
+    /* text-align: center; */
+    justify-content: flex-start;
+    /* margin-left: auto; */
+
+}
+.light-container {
+    display: flex;
+    align-self: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 8em;
+    max-width: 30%;
+
+}
+/*BRI*/
+input[min="1"]{
+    -webkit-appearance: none;
+    appearance: none;
+
+    transform: rotate(-90deg); /* change to vertical */
+    width: 8em; /* height */
+    height: 7em; /* width */
+    background: #C9D5DB;
+    border-radius: 2px;
+    outline: none;
+    overflow: hidden; /* box-shadow 限制在内*/
+
+    /* margin: 1em; */
+
+    display: flex;
+    align-self: center;
+
+}
+/*BRI thumb*/
+input[min="1"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    align-self: center;
+    align-items: center;
+    width: 1em; /* height */
+    height: 7em;
+    background: #ffe68c;
+    cursor: pointer;
+    border-left: 3px solid white;
+    box-shadow: -6em 0 0 6em #fff6b5;
+    top: 50%;  /* 使滑块按钮垂直居中 */
+    /* transform: translateY(-10%)  */
+     /*调整垂直位置*/  
+}
+input[min="1"]::-moz-range-thumb {
+    align-self: center;
+    align-items: center;
+    width: 1em; /* height */
+    height: 7em;
+    background: #fff6b5;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: -6em 0 0 6em #fff6b5;
+    top: 50%;  /* 使滑块按钮垂直居中 */ 
+}
+
+/*CT*/
+input[min="250"]{
+    -webkit-appearance: none; /* remove default apperance */
+    appearance: none;
+    /* justify-content: center; */
+    width: 7em; 
+    height: 2em;
+    background: linear-gradient(90deg,#e6fcfc, #ffbb33);
+    border-radius: 2px;
+    outline: none;
+    /* margin: 1em; */
+
+    /* display: flex; */
+    align-self: center;
+}
+/*CT thumb*/
+input[min="250"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    align-self: center;
+    align-items: center;
+    width: 1.8em; /* 滑块大小 */
+    height: 1.8em;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.5);;
+    cursor: pointer;
+    border: 3px solid white;
+    top: 50%;  /* 使滑块按钮垂直居中 */
+    /* transform: translateY(-10%)  */
+     /*调整垂直位置*/
+    
+}
+
+/*ON switch*/
+.light-button {
+    margin-top: 2em;
+    padding: 12px;
+    /* font-size: 12px; */
+    width: 3em;
+    height: 3em;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: #B0BEC5;
+    color: white;
+    transition: 0.3s;
+    text-align: center;
+    line-height: 1;
+}
+.light-button.on {
+    background-color: #FFC914;
+}
+
+
+label{
+    text-align: center;
+    margin: 1em;
+    /* font-size: 12px; */
+}
+
+.para{
+    /* margin-left: 5em; */
+    margin-left: 1em;
+}
+
+.custom-select {
+    padding: 2px;
+    background-color: #f0f0f0;
+    border: 1px solid #37474F; 
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+.custom-select option {
+    background-color: #6ECEDA;
+    color: #37474F; 
+    padding: 10px; 
+    font-family: "Fredoka", sans-serif;
+
+  }
+
+/* when selected */
+.custom-select:focus {
+    border-color: #6ECEDA;
+}
+
+.slider, .ctBar {
+    transition: all 0.5s ease-in-out; 
+}
+
+.scenes {
+    position: inherit;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.scene-button {
+    background-color: #f0f0f0;
+    border: 2px solid #37474F;
+    border-radius: 3px;
+    color: #37474F;
+    padding: .3em;
+}
+
+.scene-button:hover{
+    background-color: #e6fcfc;
+    border: 2px solid #6ECEDA;
+    color:#6ECEDA
+}
+
+.scene-button.active{
+    background-color:#6ECEDA;
+    color: #FFF;
+    border: 2px solid #6ECEDA;
+}
+
+.interface{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.addscene .sceneContainer{
+    margin-left: 2em;
+}
+
+hr{
+    border: 1px solid #37474F;
+}
+
+#sceneNameInput{
+    border: 2px solid#37474F;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: .3em;
+}
+/* 
+::placeholder {
+    color: #F8F5F2;
+  } */

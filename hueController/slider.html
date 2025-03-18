@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="sliderControl.js" defer></script>
+  <!-- <script src="addscene.js" defer></script> -->
+  <link rel="stylesheet" href="style.css">
+  <title>HUE controller</title>
+</head>
+
+<body>
+    <div class="add">
+    <!-- 选择 Hue Bridge IP -->
+    <span>Hub:</span>
+    <select class="custom-select" id="ipSelect"></select>
+        
+    <!-- 选择用户 -->
+    <span>User:</span>
+    <select class="custom-select" id="userSelect"></select>
+    </div>
+    <br>
+    
+<div class="interface">
+    <div id="lightsContainer">
+    <!-- 这里动态填充bri的 slider -->
+    </div>  
+    <hr>
+    <div class="scenes">
+        <button class="scene-button" id="scene1Button" onclick="applyLocalScene('scene1')">Firespace</button>
+        <button class="scene-button" id="scene2Button" onclick="applyLocalScene('scene2')">Train</button>
+        
+    </div>
+    
+</div>
+<hr>
+<div class="addscene">
+    <input type="text" id="sceneNameInput" placeholder="Enter scene name">
+    <button class="scene-button" onclick="saveCurrentScene(document.getElementById('sceneNameInput').value)">Save Scene</button>
+</div>
+
+<div id="sceneContainer"></div>
+
+</body>
+</html>
